@@ -18,12 +18,12 @@ sp = spotipy.Spotify(auth=token)
 while "Spotify.exe" in (i.name() for i in psutil.process_iter()):    #code will stop running after you exit spotify
     time.sleep(1)
     try:
-        if sp.current_user_playing_track()['currently_playing_type'] == 'ad':
-            os.system("TASKKILL /F /IM Spotify.exe")
-            os.startfile(location)
-            time.sleep(3)
-            pyautogui.press('nexttrack')
-            Minimize = win32gui.GetForegroundWindow()
+        if sp.current_user_playing_track()['currently_playing_type'] == 'ad':   #if advert is detected
+            os.system("TASKKILL /F /IM Spotify.exe")    #exit spotify
+            os.startfile(location)                      #start spotify
+            time.sleep(3)                               #wait for 3 seconds for spotify to open (change accordingly)
+            pyautogui.press('nexttrack')                #play next song in queue
+            Minimize = win32gui.GetForegroundWindow()   #minimize the window in front (which should be spotify as it opened it again and waited for 3 seconds to let it come on the front screen)
             win32gui.ShowWindow(Minimize, win32con.SW_MINIMIZE)
     except:
         pass
